@@ -4,7 +4,7 @@ from django.db import models
 
 
 class Car(models.Model):
-    name = models.CharField(max_length=200)
+    manufacturer = models.ForeignKey('manufacturers.Manufacturer', null=True, blank=False, on_delete=models.SET_NULL)
     type = models.CharField(max_length=200, choices=(("truck", "truck"), ("car", "car"),))
     model = models.CharField(max_length=200)
     year_of_manufacture = models.DateField()
