@@ -38,6 +38,7 @@ class SingleRentalObjectTests(APITestCase):
             self.rental_object.car_id, new_car_id, f"updated_rental_object.car_id should be {new_car_id}")
 
     def test_rental_object_can_be_deleted(self):
+        self.assertEqual(RentalObject.objects.count(), 1, "RentalObject.objects.count() should be 1")
         response = self.client.delete(f"/api/v1/rental-objects/{self.rental_object.id}/")
         self.assertEqual(response.status_code, 204, "response.status_code should be 204")
-        self.assertEqual(RentalObject.objects.count(), 0)
+        self.assertEqual(RentalObject.objects.count(), 0, "RentalObject.objects.count() shoud be 0")

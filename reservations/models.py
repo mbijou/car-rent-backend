@@ -13,7 +13,8 @@ class Reservation(models.Model):
     not_registered_user = models.ForeignKey("users.NotRegisteredUser", null=True, on_delete=models.SET_NULL)
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
-    car_price_model = models.ForeignKey("price_models.CarPriceModel", null=True, blank=False, on_delete=models.CASCADE)
+    rental_object_price_model = models.ForeignKey("price_models.RentalObjectPriceModel", null=True, blank=False,
+                                                  on_delete=models.CASCADE)
 
 
 # 1 NF

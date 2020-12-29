@@ -37,11 +37,13 @@ class SingleCarTests(APITestCase):
         self.car.refresh_from_db()
 
         self.assertEqual(
-            self.car.manufacturer_id, new_manufacturer_id, f"self.car.manufacturer should be {new_manufacturer_id}")
+            self.car.manufacturer_id, new_manufacturer_id, f"self.car.manufacturer should be {new_manufacturer_id}"
+        )
 
         self.assertEqual(self.car.model, new_model_name, f"self.car.model should be {new_model_name}")
 
     def test_car_can_be_deleted(self):
+        self.assertEqual(Car.objects.count(), 1, "Car.objects.count() should be 1")
         response = self.client.delete(f"/api/v1/cars/{self.car.id}/")
         self.assertEqual(response.status_code, 204, "response.status_code should be 204")
         self.assertEqual(Car.objects.count(), 0, "Car.objects.count() should be 0")
