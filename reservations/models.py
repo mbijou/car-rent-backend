@@ -10,15 +10,10 @@ class Reservation(models.Model):
     pick_up_datetime = models.DateTimeField()
     return_datetime = models.DateTimeField()
 
-    not_registered_user = models.ForeignKey("reservations.NotRegisteredUser", null=True, on_delete=models.SET_NULL)
+    not_registered_user = models.ForeignKey("users.NotRegisteredUser", null=True, on_delete=models.SET_NULL)
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
-
-class NotRegisteredUser(models.Model):
-    first_name = models.CharField(max_length=200)
-    last_name = models.CharField(max_length=200)
-    email = models.EmailField(max_length=200)
-    # profile = models.ForeignKey('users.Profile')
+    car_price_model = models.ForeignKey("price_models.CarPriceModel", null=True, blank=False, on_delete=models.CASCADE)
 
 
 # 1 NF

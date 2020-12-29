@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'manufacturers',
     'properties',
     'rental_objects',
+    'price_models',
     'reservations',
     'users',
     'rest_framework',

@@ -1,0 +1,11 @@
+[
+{
+    "model": "cars.car",
+    "pk": 3,
+    "fields": {
+        "manufacturer": 1,
+        "type": "car",
+        "model": "X5"
+    }
+}
+]

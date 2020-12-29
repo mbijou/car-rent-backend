@@ -1,0 +1,16 @@
+[
+{
+    "model": "manufacturers.manufacturer",
+    "pk": 1,
+    "fields": {
+        "name": "BMW"
+    }
+},
+{
+    "model": "manufacturers.manufacturer",
+    "pk": 2,
+    "fields": {
+        "name": "VW"
+    }
+}
+]

@@ -15,3 +15,14 @@ class Address(models.Model):
     house_number = models.CharField(max_length=200)
     location = models.CharField(max_length=200)
     postal_code = models.CharField(max_length=200)
+
+
+class NotRegisteredUser(models.Model):
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    email = models.EmailField(max_length=200)
+    profile = models.ForeignKey('users.NotRegisteredProfile', on_delete=models.CASCADE)
+
+
+class NotRegisteredProfile(models.Model):
+    address = models.ForeignKey("users.Address", null=True, on_delete=models.SET_NULL)
