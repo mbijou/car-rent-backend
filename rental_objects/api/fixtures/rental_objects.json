@@ -3,8 +3,9 @@
     "model": "rental_objects.rentalobject",
     "pk": 1,
     "fields": {
-        "car": 3,
-        "year_of_manufacture": 2020,
+        "car": 1,
+        "year_of_manufacture": 2012,
+        "price_model": 2,
         "properties": []
     }
 }

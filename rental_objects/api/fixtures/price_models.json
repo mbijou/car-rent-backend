@@ -1,0 +1,16 @@
+[
+{
+    "model": "price_models.pricemodel",
+    "pk": 1,
+    "fields": {
+        "name": "A"
+    }
+},
+{
+    "model": "price_models.pricemodel",
+    "pk": 2,
+    "fields": {
+        "name": "B"
+    }
+}
+]

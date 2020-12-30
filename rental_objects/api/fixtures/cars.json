@@ -1,7 +1,7 @@
 [
 {
     "model": "cars.car",
-    "pk": 3,
+    "pk": 1,
     "fields": {
         "manufacturer": 1,
         "type": "car",
@@ -10,7 +10,7 @@
 },
 {
     "model": "cars.car",
-    "pk": 4,
+    "pk": 2,
     "fields": {
         "manufacturer": 2,
         "type": "car",

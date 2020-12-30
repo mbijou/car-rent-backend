@@ -1,0 +1,13 @@
+[
+{
+    "model": "price_models.dailyprice",
+    "pk": 1,
+    "fields": {
+        "price_model": 2,
+        "day": "5",
+        "free_km": 300,
+        "km_price": "0.25",
+        "fixedprice": "50.00"
+    }
+}
+]

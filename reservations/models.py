@@ -13,9 +13,6 @@ class Reservation(models.Model):
     not_registered_user = models.ForeignKey("users.NotRegisteredUser", null=True, on_delete=models.SET_NULL)
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
-    rental_object_price_model = models.ForeignKey("price_models.RentalObjectPriceModel", null=True, blank=False,
-                                                  on_delete=models.CASCADE)
-
 
 # 1 NF
 # Felder müssen atomar sein: telefon=069432423, 02132143243

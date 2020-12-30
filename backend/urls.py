@@ -22,4 +22,5 @@ urlpatterns = [
     path('api/v1/', include('cars.api.urls')),
     path('api/v1/', include('manufacturers.api.urls')),
     path('api/v1/', include('rental_objects.api.urls')),
+    path('api/v1/', include('price_models.api.urls')),
 ]
