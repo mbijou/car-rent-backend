@@ -1,7 +1,7 @@
 from django.db.transaction import atomic
 from rest_framework import serializers
 
-from price_models.models import PriceModel, DailyPrice
+from price_models.models import PriceModel, Price
 
 
 class PriceModelSerializer(serializers.ModelSerializer):
@@ -10,16 +10,16 @@ class PriceModelSerializer(serializers.ModelSerializer):
         fields = ("id", "name", )
 
 
-class DailyPriceSerializer(serializers.ModelSerializer):
+class PriceSerializer(serializers.ModelSerializer):
     class Meta:
-        model = DailyPrice
+        model = Price
         fields = ("id", "day", "free_km", "km_price", "fixedprice",)
 
     @atomic
     def create(self, validated_data):
         price_model_id = self.context.get("price_model_pk")
 
-        instance = DailyPrice(**validated_data)
+        instance = Price(**validated_data)
         instance.price_model_id = price_model_id
         instance.save()
         return instance

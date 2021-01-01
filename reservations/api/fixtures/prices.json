@@ -1,0 +1,24 @@
+[
+{
+    "model": "price_models.price",
+    "pk": 1,
+    "fields": {
+        "price_model": 1,
+        "day": 5,
+        "free_km": 200,
+        "km_price": "0.19",
+        "fixedprice": "30.00"
+    }
+},
+{
+    "model": "price_models.price",
+    "pk": 2,
+    "fields": {
+        "price_model": 3,
+        "day": 3,
+        "free_km": 200,
+        "km_price": "0.19",
+        "fixedprice": "30.00"
+    }
+}
+]

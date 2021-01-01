@@ -1,0 +1,11 @@
+[
+{
+    "model": "users.notregistereduser",
+    "pk": 3,
+    "fields": {
+        "first_name": "Tom",
+        "last_name": "Smith",
+        "email": "testmail@nomail.con"
+    }
+}
+]

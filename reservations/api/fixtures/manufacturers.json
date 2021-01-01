@@ -1,0 +1,9 @@
+[
+{
+    "model": "manufacturers.manufacturer",
+    "pk": 1,
+    "fields": {
+        "name": "Mercedes"
+    }
+}
+]

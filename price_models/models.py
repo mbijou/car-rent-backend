@@ -18,7 +18,7 @@ DAYS_OF_WEEK = (
 )
 
 
-class DailyPrice(models.Model):
+class Price(models.Model):
     price_model = models.ForeignKey("price_models.PriceModel", on_delete=models.CASCADE)
     day = models.IntegerField(choices=DAYS_OF_WEEK)
     free_km = models.IntegerField()

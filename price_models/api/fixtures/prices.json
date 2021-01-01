@@ -1,6 +1,6 @@
 [
 {
-    "model": "price_models.dailyprice",
+    "model": "price_models.price",
     "pk": 1,
     "fields": {
         "price_model": 2,

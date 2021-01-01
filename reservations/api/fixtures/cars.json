@@ -1,0 +1,11 @@
+[
+{
+    "model": "cars.car",
+    "pk": 1,
+    "fields": {
+        "manufacturer": 1,
+        "type": "car",
+        "model": "B250"
+    }
+}
+]
