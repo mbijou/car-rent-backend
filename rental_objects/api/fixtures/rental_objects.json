@@ -5,8 +5,10 @@
     "fields": {
         "car": 1,
         "year_of_manufacture": 2012,
-        "price_model": 2,
-        "properties": []
+        "properties": [],
+        "price_models": [
+            1
+        ]
     }
 }
 ]

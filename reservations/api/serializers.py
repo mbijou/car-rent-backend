@@ -3,6 +3,7 @@ from rest_framework import serializers
 from reservations.models import Reservation
 from users.api.serializers import NotRegisteredUserSerializer
 from users.models import NotRegisteredUser, Address
+from django.core.exceptions import ValidationError
 
 
 class ReservationSerializer(serializers.ModelSerializer):
@@ -11,7 +12,7 @@ class ReservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reservation
         fields = ("id", "rental_object", "pick_up_datetime", "return_datetime", "not_registered_user", "user",
-                  "price", )
+                  "price_model", )
 
     @atomic
     def create(self, validated_data):
@@ -32,3 +33,11 @@ class ReservationSerializer(serializers.ModelSerializer):
         reservation = Reservation(**validated_data, not_registered_user=not_registered_user)
         reservation.save()
         return reservation
+
+    def validate(self, attrs):
+        rental_object = attrs.get("rental_object")
+        price_model = attrs.get("price_model")
+
+        if not rental_object or price_model not in rental_object.price_models.all():
+            raise ValidationError({'price_model': ["Must be a price model of rental object!", ]})
+        return super().validate(attrs)

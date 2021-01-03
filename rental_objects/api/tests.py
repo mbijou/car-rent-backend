@@ -10,10 +10,11 @@ class RentalObjectTests(APITestCase):
                 ]
 
     def test_rental_object_can_be_created(self):
-        data = {"car": 1, "year_of_manufacture": 2020, "price_model": 1}
+        data = {"car": 1, "year_of_manufacture": 2020, "price_models": [2]}
         response = self.client.post("/api/v1/rental-objects/", data=data)
         self.assertEqual(response.status_code, 201, "response.status_code should be 201")
         self.assertEqual(RentalObject.objects.count(), 1, "RentalObject.objects.count()")
+        self.assertEqual(RentalObject.objects.first().price_models.first().id, 2)
 
 
 class SingleRentalObjectTests(APITestCase):
@@ -25,14 +26,14 @@ class SingleRentalObjectTests(APITestCase):
 
     def test_rental_object_can_be_updated(self):
         new_car_id = 2
-        new_price_model_id = 1
+        new_price_model_id = 2
 
         serializer = RentalObjectSerializer(instance=self.rental_object)
 
         data = serializer.data
 
         data["car"] = new_car_id
-        data["price_model"] = new_price_model_id
+        data["price_models"] = [new_price_model_id]
 
         response = self.client.put(f"/api/v1/rental-objects/{self.rental_object.id}/", data=data)
         self.assertEqual(response.status_code, 200, "response.status_code should be 200")
@@ -43,8 +44,8 @@ class SingleRentalObjectTests(APITestCase):
             self.rental_object.car_id, new_car_id, f"rental_object.car_id should be {new_car_id}")
 
         self.assertEqual(
-            self.rental_object.price_model_id, new_price_model_id,
-            f"rental_object.price_model_id should be {new_price_model_id}")
+            self.rental_object.price_models.first().id, new_price_model_id
+        )
 
     def test_rental_object_can_be_deleted(self):
         self.assertEqual(RentalObject.objects.count(), 1, "RentalObject.objects.count() should be 1")

@@ -1,11 +1,12 @@
 from rest_framework.test import APITestCase
-
-from price_models.models import Price
+from price_models.models import PriceModel
 from rental_objects.models import RentalObject
+from reservations.api.serializers import ReservationSerializer
 from reservations.models import Reservation
+from users.models import NotRegisteredUser
+from django.core.exceptions import ValidationError
 # TODO Reservation Endpunkte erstellen, price_model soll bei Reservierungen zugewiesen werden
 # TODO Prperties zu Mietobjekte erstellen können
-from users.models import NotRegisteredUser
 
 
 class ReservationTests(APITestCase):
@@ -14,8 +15,7 @@ class ReservationTests(APITestCase):
                 "reservations/api/fixtures/rental_objects.json", ]
 
     def setUp(self):
-        self.price = Price.objects.get(pk=1)
-        self.price_model = self.price.price_model
+        self.price_model = PriceModel.objects.get(pk=1)
         self.rental_object = RentalObject.objects.get(pk=1)
 
     def test_reservation_can_be_created(self):
@@ -27,7 +27,7 @@ class ReservationTests(APITestCase):
                                     "profile": profile
                                     }
 
-        data = {"rental_object": self.rental_object.id, "price": self.price.id,
+        data = {"rental_object": self.rental_object.id, "price_model": self.price_model.id,
                 "pick_up_datetime": "2021-01-01 17:30", "return_datetime": "2021-01-02 17:30",
                 "not_registered_user": not_registered_user_data,
                 "user": None,
@@ -76,19 +76,23 @@ class ReservationExceptionTests(APITestCase):
 
     def setUp(self):
         self.reservation = Reservation.objects.get(pk=1)
-        self.not_registered_user = NotRegisteredUser.objects.get(pk=3)
-        self.not_registered_user_profile = self.not_registered_user.profile
+        self.rental_object = RentalObject.objects.get(pk=1)
 
-        self.not_registered_user_profile.address_id = 1
-        self.not_registered_user_profile.user_id = 3
+    def test_Should_FailToCreate_When_PriceIsAssignedToReservationThatIsNotPartOfRentalObjectsPriceModels(self):
+        self.assertIn(self.reservation.price_model, self.rental_object.price_models.all())
 
-        self.not_registered_user_profile.save()
+        wrong_price_model = PriceModel.objects.get(pk=2)
 
-    def test_Should_FailToCreate_When_PriceIsAssignedToReservationThatIsNotPartOfRentalObjectsPriceModel(self):
-        # TODO
-        # TODO Redesign model for price, because only one price per day can be assigned to reservation in the model now
-        print(self.reservation.rental_object, self.reservation.not_registered_user,
-              self.reservation.not_registered_user.profile, self.reservation.not_registered_user.profile.address)
+        self.reservation.price_model = wrong_price_model
+
+        data = ReservationSerializer(instance=self.reservation).data
+
+        reservation_serializer = ReservationSerializer(
+            instance=self.reservation, data=data
+        )
+
+        self.assertEqual(False, reservation_serializer.is_valid())
+
 
 # Should_ExpectedBehavior_When_StateUnderTest
 # Should_ThrowException_When_AgeLessThan18

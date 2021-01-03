@@ -5,6 +5,7 @@ from django.db import models
 
 class PriceModel(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
+    # rental_objects = models.ManyToManyField("rental_objects.RentalObject", blank=True)
 
 
 DAYS_OF_WEEK = (
@@ -19,7 +20,7 @@ DAYS_OF_WEEK = (
 
 
 class Price(models.Model):
-    price_model = models.ForeignKey("price_models.PriceModel", on_delete=models.CASCADE)
+    price_model = models.ForeignKey("price_models.PriceModel", null=True, blank=False, on_delete=models.CASCADE)
     day = models.IntegerField(choices=DAYS_OF_WEEK)
     free_km = models.IntegerField()
     km_price = models.DecimalField(max_digits=8, decimal_places=2)  # ct./ km

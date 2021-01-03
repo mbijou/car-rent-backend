@@ -6,8 +6,4 @@ from rental_objects.models import RentalObject
 class RentalObjectSerializer(ModelSerializer):
     class Meta:
         model = RentalObject
-        fields = ("id", "car", "year_of_manufacture", "properties", "price_model",)
-        extra_kwargs = {"price_model": {
-            "required": True,
-            "allow_null": False
-        }}
+        fields = ("id", "car", "year_of_manufacture", "properties", "price_models",)

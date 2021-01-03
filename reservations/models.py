@@ -1,7 +1,5 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-
-
 User = get_user_model()
 
 
@@ -13,7 +11,8 @@ class Reservation(models.Model):
     not_registered_user = models.ForeignKey("users.NotRegisteredUser", null=True, on_delete=models.SET_NULL)
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
-    price = models.ForeignKey(to="price_models.Price", null=True, blank=False, on_delete=models.SET_NULL)
+    price_model = models.ForeignKey(to="price_models.PriceModel", null=True, blank=False, on_delete=models.SET_NULL)
+
 
 # 1 NF
 # Felder müssen atomar sein: telefon=069432423, 02132143243

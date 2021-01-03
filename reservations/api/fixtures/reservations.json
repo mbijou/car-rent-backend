@@ -8,7 +8,7 @@
         "return_datetime": "2021-01-02T17:30:00Z",
         "not_registered_user": 3,
         "user": null,
-        "price": 1
+        "price_model": 1
     }
 }
 ]
